@@ -7,6 +7,7 @@ import {
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
+import { updateCartQuantity } from "../checkout.js";
 
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
@@ -122,6 +123,7 @@ export function renderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
       container.remove();
+      updateCartQuantity();
 
       renderPaymentSummary();
     });
