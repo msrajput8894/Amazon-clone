@@ -149,23 +149,26 @@ export function renderOrderSummary() {
     });
   });
 
+  //code for updating the quantity
+
   document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      const productId = link.dataset.productId;
+    const productId = link.dataset.productId;
 
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
+    const container = document.querySelector(
+      `.js-cart-item-container-${productId}`
+    );
 
-      const quantityInput = document.querySelector(
-        `.js-quantity-input-${productId}`
-      );
+    const quantityInput = document.querySelector(
+      `.js-quantity-input-${productId}`
+    );
 
+    const errorMessage = document.querySelector(
+      `.js-error-message-${productId}`
+    );
+
+    const updateQuantityHandler = () => {
       const newQuantity = Number(quantityInput.value);
 
-      const errorMessage = document.querySelector(
-        `.js-error-message-${productId}`
-      );
       if (isNaN(newQuantity) || newQuantity < 0 || newQuantity > 1000) {
         errorMessage.textContent = "Quantity must be between 0 and 1000.";
         quantityInput.style.borderColor = "red";
@@ -189,6 +192,14 @@ export function renderOrderSummary() {
         renderOrderSummary();
         renderPaymentSummary();
         updateCartQuantity();
+      }
+    };
+
+    link.addEventListener("click", updateQuantityHandler);
+
+    quantityInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        updateQuantityHandler();
       }
     });
   });
