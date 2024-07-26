@@ -64,12 +64,15 @@ export function renderOrderSummary() {
                   </span>
                   <input class="quantity-input js-quantity-input-${
                     matchingProduct.id
-                  }">
+                  }" min="0" max="1000" type="number">
                   <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${
                     matchingProduct.id
                   }">
                   Save
                   </span>
+                  <span class="error js-error-message-${
+                    matchingProduct.id
+                  }" id="error-message"></span>
                   <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${
                     matchingProduct.id
                   }" 
@@ -154,15 +157,39 @@ export function renderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
 
-      container.classList.remove("is-editing-quantity");
-
       const quantityInput = document.querySelector(
         `.js-quantity-input-${productId}`
       );
+
       const newQuantity = Number(quantityInput.value);
-      updateQuantity(productId, newQuantity);
-      renderOrderSummary();
-      updateCartQuantity();
+
+      const errorMessage = document.querySelector(
+        `.js-error-message-${productId}`
+      );
+      if (isNaN(newQuantity) || newQuantity < 0 || newQuantity > 1000) {
+        errorMessage.textContent = "Quantity must be between 0 and 1000.";
+        quantityInput.style.borderColor = "red";
+      } else if (newQuantity === 0) {
+        removeFromCart(productId);
+
+        const container = document.querySelector(
+          `.js-cart-item-container-${productId}`
+        );
+        container.remove();
+        updateCartQuantity();
+
+        renderPaymentSummary();
+      } else {
+        errorMessage.textContent = "";
+        quantityInput.style.borderColor = "";
+
+        container.classList.remove("is-editing-quantity");
+
+        updateQuantity(productId, newQuantity);
+        renderOrderSummary();
+        renderPaymentSummary();
+        updateCartQuantity();
+      }
     });
   });
 
