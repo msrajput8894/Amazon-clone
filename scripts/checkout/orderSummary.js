@@ -57,7 +57,9 @@ export function renderOrderSummary() {
                     Update
                   </span>
                   <input class="quantity-input">
-                  <span class="save-quantity-link link-primary">
+                  <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${
+                    matchingProduct.id
+                  }">
                   Save
                   </span>
                   <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${
@@ -121,6 +123,33 @@ export function renderOrderSummary() {
 
   document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
+  document.querySelectorAll(".js-update-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      const productId = link.dataset.productId;
+
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+
+      container.classList.add("is-editing-quantity");
+      updateCartQuantity();
+
+      renderPaymentSummary();
+    });
+  });
+
+  document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      const productId = link.dataset.productId;
+
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+
+      container.classList.remove("is-editing-quantity");
+    });
+  });
+
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
@@ -130,16 +159,6 @@ export function renderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
       container.remove();
-      updateCartQuantity();
-
-      renderPaymentSummary();
-    });
-  });
-
-  document.querySelectorAll(".js-update-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      const productId = link.dataset.productId;
-      console.log(productId);
       updateCartQuantity();
 
       renderPaymentSummary();
