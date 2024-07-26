@@ -134,6 +134,7 @@ export function renderOrderSummary() {
 
   document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
+  // to update the cart quantity
   document.querySelectorAll(".js-update-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
@@ -149,8 +150,7 @@ export function renderOrderSummary() {
     });
   });
 
-  //code for updating the quantity
-
+  //code for saving the quantity by update link
   document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
     const productId = link.dataset.productId;
 
@@ -175,10 +175,7 @@ export function renderOrderSummary() {
       } else if (newQuantity === 0) {
         removeFromCart(productId);
 
-        const container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-        container.remove();
+        renderOrderSummary();
         updateCartQuantity();
 
         renderPaymentSummary();
@@ -204,21 +201,19 @@ export function renderOrderSummary() {
     });
   });
 
+  // to delete items from cart
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
 
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-      container.remove();
+      renderOrderSummary();
       updateCartQuantity();
-
       renderPaymentSummary();
     });
   });
 
+  //to update delivery option
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
     element.addEventListener("click", () => {
       const { productId, deliveryOptionId } = element.dataset;
