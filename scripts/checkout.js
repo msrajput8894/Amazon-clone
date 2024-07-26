@@ -1,16 +1,12 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { loadProducts, loadProductsFetch } from "../data/products.js";
-import { loadCart } from "../data/cart.js";
+import { loadCart, cart } from "../data/cart.js";
 //import "../data/cart-class.js";
 //import "../data/backend-practice.js";
 
-
-
-
-async function loadPage(){
-  try{
-
+async function loadPage() {
+  try {
     await Promise.all([
       loadProductsFetch(),
       new Promise((resolve) => {
@@ -18,16 +14,28 @@ async function loadPage(){
           resolve();
         });
       }),
-    ])
-  } catch(error){
-    console.log('Unexpected Error. Please try again later.')
+    ]);
+  } catch (error) {
+    console.log("Unexpected Error. Please try again later.");
   }
 
+  updateCartQuantity();
   renderOrderSummary();
   renderPaymentSummary();
 }
 
- loadPage()
+loadPage();
+
+function updateCartQuantity() {
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  document.querySelector(
+    ".js-cart-item-quantity"
+  ).innerHTML = `${cartQuantity} items`;
+}
 
 /*
 Promise.all([
