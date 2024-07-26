@@ -22,21 +22,26 @@ export function renderPaymentSummary() {
 
   const totalCents = totalBeforeTaxCents + taxCents;
 
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
   const paymentSummaryHTML = `
     
          <div class="payment-summary-title">Order Summary</div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${cartQuantity}):</div>
             <div class="payment-summary-money">
-                $${formatCurrency( productPriceCents)}
+                $${formatCurrency(productPriceCents)}
             </div>
           </div>
 
           <div class="payment-summary-row">
             <div>Shipping &amp; handling:</div>
             <div class="payment-summary-money">
-                $${formatCurrency( shippingPriceCents)}
+                $${formatCurrency(shippingPriceCents)}
             </div>
           </div>
 
@@ -66,27 +71,28 @@ export function renderPaymentSummary() {
           </button>
     `;
 
-    document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
+  document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
 
-    document.querySelector('.js-place-order').addEventListener('click', async ()=>{
-      try{
-     const response = await fetch('https://supersimplebackend.dev/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          cart:  cart
-        })
+  document
+    .querySelector(".js-place-order")
+    .addEventListener("click", async () => {
+      try {
+        const response = await fetch("https://supersimplebackend.dev/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            cart: cart,
+          }),
+        });
 
-      });
+        const order = await response.json();
+        addOrder(order);
+      } catch (error) {
+        console.log("Unexpected Error. Try again later");
+      }
 
-     const order = await response.json()
-     addOrder(order);
-    } catch(error){
-      console.log('Unexpected Error. Try again later')
-    }
-
-    window.location.href = 'orders.html'
-    })
+      window.location.href = "orders.html";
+    });
 }
