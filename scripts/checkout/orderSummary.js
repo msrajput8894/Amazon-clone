@@ -50,8 +50,15 @@ export function renderOrderSummary() {
                   <span> Quantity: <span class="quantity-label">${
                     cartItem.quantity
                   }</span> </span>
-                  <span class="update-quantity-link link-primary">
+                  <span class="update-quantity-link link-primary js-update-link js-update-link-${
+                    matchingProduct.id
+                  }" 
+                  data-product-id=${matchingProduct.id}>
                     Update
+                  </span>
+                  <input class="quantity-input">
+                  <span class="save-quantity-link link-primary">
+                  Save
                   </span>
                   <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${
                     matchingProduct.id
@@ -123,6 +130,16 @@ export function renderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
       container.remove();
+      updateCartQuantity();
+
+      renderPaymentSummary();
+    });
+  });
+
+  document.querySelectorAll(".js-update-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      const productId = link.dataset.productId;
+      console.log(productId);
       updateCartQuantity();
 
       renderPaymentSummary();
