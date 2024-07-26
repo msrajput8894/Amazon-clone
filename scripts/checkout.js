@@ -26,7 +26,7 @@ async function loadPage() {
 
 loadPage();
 
-function updateCartQuantity() {
+export function updateCartQuantity() {
   let cartQuantity = 0;
   cart.forEach((cartItem) => {
     cartQuantity += cartItem.quantity;
