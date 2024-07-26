@@ -1,4 +1,10 @@
-import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
+import {
+  cart,
+  loadCart,
+  removeFromCart,
+  updateDeliveryOption,
+  updateQuantity,
+} from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
@@ -56,7 +62,9 @@ export function renderOrderSummary() {
                   data-product-id=${matchingProduct.id}>
                     Update
                   </span>
-                  <input class="quantity-input">
+                  <input class="quantity-input js-quantity-input-${
+                    matchingProduct.id
+                  }">
                   <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${
                     matchingProduct.id
                   }">
@@ -147,6 +155,14 @@ export function renderOrderSummary() {
       );
 
       container.classList.remove("is-editing-quantity");
+
+      const quantityInput = document.querySelector(
+        `.js-quantity-input-${productId}`
+      );
+      const newQuantity = Number(quantityInput.value);
+      updateQuantity(productId, newQuantity);
+      renderOrderSummary();
+      updateCartQuantity();
     });
   });
 
