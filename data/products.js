@@ -17,6 +17,7 @@ class Product {
   name;
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -24,6 +25,7 @@ class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
   }
 
   getStarUrl() {
@@ -103,13 +105,12 @@ export function loadProductsFetch() {
         }
         return new Product(productDetails);
       });
-      
-    }).catch((error)=>{
-      console.log('Unexpected Error. Please try again later.')
     })
+    .catch((error) => {
+      console.log("Unexpected Error. Please try again later.");
+    });
   return promise;
 }
-
 
 /*
 loadProductsFetch().then(() => {
@@ -127,18 +128,17 @@ export function loadProducts(fun) {
       }
       return new Product(productDetails);
     });
-    
+
     fun();
   });
 
-  xhr.addEventListener('error',(error)=>{
-    console.log('Unexpected error. Please try again later.')
-  })
+  xhr.addEventListener("error", (error) => {
+    console.log("Unexpected error. Please try again later.");
+  });
 
   xhr.open("GET", "https://supersimplebackend.dev/products");
   xhr.send();
 }
-
 
 /*
 export const products = [
