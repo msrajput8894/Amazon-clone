@@ -1,7 +1,9 @@
 import { cart, addToCart, calculateCartQuantity } from "../data/cart.js";
 import { products, loadProducts } from "../data/products.js";
+import { renderAmazonHeader } from "./utils/amazonHeader.js";
 import { formatCurrency } from "./utils/money.js";
 
+renderAmazonHeader();
 loadProducts(renderProductGrid);
 
 function renderProductGrid() {

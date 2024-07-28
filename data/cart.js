@@ -1,3 +1,5 @@
+import { renderAmazonHeader } from "../scripts/utils/amazonHeader.js";
+
 export let cart;
 
 loadFromStorage();
@@ -49,7 +51,7 @@ export function addToCart(productId) {
       deliveryOptionId: "1",
     });
   }
-
+  renderAmazonHeader();
   saveToStorage();
   displayMessage(productId);
 }
@@ -73,6 +75,7 @@ export function buyAgain(productId) {
   }
 
   saveToStorage();
+  renderAmazonHeader();
 }
 
 const addedMessageTimeouts = {};
