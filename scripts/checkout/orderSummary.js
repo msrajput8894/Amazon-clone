@@ -14,8 +14,10 @@ import {
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { updateCartQuantity } from "../checkout.js";
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 export function renderOrderSummary() {
+  renderCheckoutHeader();
   let cartSummaryHTML = "";
 
   cart.forEach((cartItem) => {
@@ -145,6 +147,7 @@ export function renderOrderSummary() {
 
       container.classList.add("is-editing-quantity");
       updateCartQuantity();
+      renderCheckoutHeader();
 
       renderPaymentSummary();
     });
@@ -153,7 +156,7 @@ export function renderOrderSummary() {
   //code for saving the quantity by update link
   document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
     const productId = link.dataset.productId;
-
+    renderCheckoutHeader();
     const container = document.querySelector(
       `.js-cart-item-container-${productId}`
     );
@@ -167,7 +170,7 @@ export function renderOrderSummary() {
     );
 
     const updateQuantityHandler = () => {
-      const newQuantity = quantityInput.value ? Number(newQuantity.value) : 1;
+      const newQuantity = quantityInput.value ? Number(quantityInput.value) : 1;
 
       if (isNaN(newQuantity) || newQuantity < 0 || newQuantity > 1000) {
         errorMessage.textContent = "Quantity must be between 0 and 1000.";
@@ -176,8 +179,6 @@ export function renderOrderSummary() {
         removeFromCart(productId);
 
         renderOrderSummary();
-        updateCartQuantity();
-
         renderPaymentSummary();
       } else {
         errorMessage.textContent = "";
@@ -188,7 +189,6 @@ export function renderOrderSummary() {
         updateQuantity(productId, newQuantity);
         renderOrderSummary();
         renderPaymentSummary();
-        updateCartQuantity();
       }
     };
 
@@ -207,8 +207,8 @@ export function renderOrderSummary() {
       const productId = link.dataset.productId;
       removeFromCart(productId);
 
+      renderCheckoutHeader();
       renderOrderSummary();
-      updateCartQuantity();
       renderPaymentSummary();
     });
   });
