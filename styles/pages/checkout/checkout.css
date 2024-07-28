@@ -42,6 +42,14 @@
   }
 }
 
+.button-primary-link {
+  padding: 8px 15px;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
 .cart-item-container,
 .payment-summary {
   border: 1px solid rgb(222, 222, 222);
