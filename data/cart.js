@@ -75,6 +75,7 @@ export function buyAgain(productId) {
   }
 
   saveToStorage();
+  renderAmazonHeader();
 }
 
 const addedMessageTimeouts = {};

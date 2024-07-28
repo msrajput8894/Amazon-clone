@@ -3,6 +3,9 @@ import { orders } from "../data/orders.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { formatCurrency } from "./utils/money.js";
 import { buyAgain } from "../data/cart.js";
+import { renderAmazonHeader } from "./utils/amazonHeader.js";
+
+renderAmazonHeader();
 
 async function loadPage() {
   console.log(orders);

@@ -6,7 +6,6 @@ export function renderAmazonHeader() {
   cart.forEach((cartItem) => {
     cartQuantity += cartItem.quantity;
   });
-  console.log(cartQuantity);
 
   const amazonHeaderHTML = `
      <div class="amazon-header-left-section">
@@ -46,5 +45,4 @@ export function renderAmazonHeader() {
   `;
 
   document.querySelector(".js-amazon-header").innerHTML = amazonHeaderHTML;
-  console.log(document.querySelector(".js-amazon-header"));
 }
