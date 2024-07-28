@@ -16,6 +16,10 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 import { updateCartQuantity } from "../checkout.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
+if (cart.length === 0) {
+  document.getElementById("empty-cart-message").style.display = "block";
+}
+
 export function renderOrderSummary() {
   renderCheckoutHeader();
   let cartSummaryHTML = "";
