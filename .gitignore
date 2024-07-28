@@ -1,0 +1,11 @@
+#ignore tests folder (test-jasmine)
+test-jasmine/
+
+#ignore practice js files
+data/cart-class.js
+data/cart-oop.js
+data/backend-practice.js
+
+# ignore backend folder
+backend/
+
