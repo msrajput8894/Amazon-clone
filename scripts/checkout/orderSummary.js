@@ -167,7 +167,7 @@ export function renderOrderSummary() {
     );
 
     const updateQuantityHandler = () => {
-      const newQuantity = Number(quantityInput.value);
+      const newQuantity = quantityInput.value ? Number(newQuantity.value) : 1;
 
       if (isNaN(newQuantity) || newQuantity < 0 || newQuantity > 1000) {
         errorMessage.textContent = "Quantity must be between 0 and 1000.";
