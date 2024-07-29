@@ -12,7 +12,10 @@ import {
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
-import { renderPaymentSummary } from "./paymentSummary.js";
+import {
+  renderPaymentSummary,
+  updatePlaceOrderButton,
+} from "./paymentSummary.js";
 import { updateCartQuantity } from "../checkout.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
@@ -184,6 +187,7 @@ export function renderOrderSummary() {
 
         renderOrderSummary();
         renderPaymentSummary();
+        updatePlaceOrderButton();
       } else {
         errorMessage.textContent = "";
         quantityInput.style.borderColor = "";
@@ -214,6 +218,7 @@ export function renderOrderSummary() {
       renderCheckoutHeader();
       renderOrderSummary();
       renderPaymentSummary();
+      updatePlaceOrderButton();
     });
   });
 
