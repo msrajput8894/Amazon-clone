@@ -154,7 +154,7 @@ export function renderOrderSummary() {
       container.classList.add("is-editing-quantity");
       updateCartQuantity();
       renderCheckoutHeader();
-
+      updatePlaceOrderButton();
       renderPaymentSummary();
     });
   });
