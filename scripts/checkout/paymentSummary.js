@@ -66,16 +66,24 @@ export function renderPaymentSummary() {
             </div>
           </div>
 
-          <button class="place-order-button button-primary js-place-order">
+          <button class="place-order-button button-primary js-place-order" disabled>
             Place your order
           </button>
     `;
 
   document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
 
+  if (cart.length === 0) {
+  }
+
   document
     .querySelector(".js-place-order")
     .addEventListener("click", async () => {
+      // Check if the cart is empty
+      if (cart.length === 0) {
+        return; // Exit the function if the cart is empty
+      }
+
       try {
         const response = await fetch("https://supersimplebackend.dev/orders", {
           method: "POST",
@@ -94,6 +102,18 @@ export function renderPaymentSummary() {
       }
 
       resetCart();
+      updatePlaceOrderButton();
       window.location.href = "orders.html";
     });
+}
+
+export function updatePlaceOrderButton() {
+  const placeOrderButton = document.querySelector(".js-place-order");
+  if (cart.length === 0) {
+    placeOrderButton.disabled = true;
+    placeOrderButton.classList.add("disabled");
+  } else {
+    placeOrderButton.disabled = false;
+    placeOrderButton.classList.remove("disabled");
+  }
 }

@@ -218,6 +218,14 @@
   margin-bottom: 15px;
 }
 
+.js-place-order.disabled {
+  color: rgb(150, 150, 150);
+  background-color: rgb(255, 236, 140);
+  border: 1px solid rgb(252, 230, 100);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .quantity-input {
   width: 30px;
   display: none;
