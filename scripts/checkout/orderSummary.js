@@ -19,12 +19,11 @@ import {
 import { updateCartQuantity } from "../checkout.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
-if (cart.length === 0) {
-  document.getElementById("empty-cart-message").style.display = "block";
-}
-
 export function renderOrderSummary() {
   renderCheckoutHeader();
+  if (cart.length === 0) {
+    document.getElementById("empty-cart-message").style.display = "block";
+  }
   let cartSummaryHTML = "";
 
   cart.forEach((cartItem) => {
