@@ -11,35 +11,59 @@ async function loadPage() {
   console.log(orders);
   await loadProductsFetch();
 
+  const url = new URL(window.location.href);
+  const search = url.searchParams.get("search");
+
+  let filteredOrders = orders;
+
+  // Filter orders based on search keyword
+  if (search) {
+    filteredOrders = orders.filter((order) => {
+      return order.products.some((productDetails) => {
+        const product = getProduct(productDetails.productId);
+        return (
+          product.name.toLowerCase().includes(search.toLowerCase()) ||
+          product.keywords.some((keyword) =>
+            keyword.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      });
+    });
+  }
+
   let ordersHTML = "";
 
-  orders.forEach((order) => {
-    const orderTimeString = dayjs(order.orderTime).format("MMMM D");
+  if (filteredOrders.length > 0) {
+    filteredOrders.forEach((order) => {
+      const orderTimeString = dayjs(order.orderTime).format("MMMM D");
 
-    ordersHTML += `
-      <div class="order-container">
-        <div class="order-header">
-          <div class="order-header-left-section">
-            <div class="order-date">
-              <div class="order-header-label">Order Placed:</div>
-              <div>${orderTimeString}</div>
+      ordersHTML += `
+        <div class="order-container">
+          <div class="order-header">
+            <div class="order-header-left-section">
+              <div class="order-date">
+                <div class="order-header-label">Order Placed:</div>
+                <div>${orderTimeString}</div>
+              </div>
+              <div class="order-total">
+                <div class="order-header-label">Total:</div>
+                <div>$${formatCurrency(order.totalCostCents)}</div>
+              </div>
             </div>
-            <div class="order-total">
-              <div class="order-header-label">Total:</div>
-              <div>$${formatCurrency(order.totalCostCents)}</div>
+            <div class="order-header-right-section">
+              <div class="order-header-label">Order ID:</div>
+              <div>${order.id}</div>
             </div>
           </div>
-          <div class="order-header-right-section">
-            <div class="order-header-label">Order ID:</div>
-            <div>${order.id}</div>
+          <div class="order-details-grid">
+            ${productsListHTML(order)}
           </div>
         </div>
-        <div class="order-details-grid">
-          ${productsListHTML(order)}
-        </div>
-      </div>
-    `;
-  });
+      `;
+    });
+  } else {
+    ordersHTML = `<p>No orders found with search keyword: "${search}"</p>`;
+  }
 
   function productsListHTML(order) {
     let productsListHTML = "";
@@ -101,6 +125,20 @@ async function loadPage() {
       }, 1000);
     });
   });
+
+  document.querySelector(".js-search-button").addEventListener("click", () => {
+    const search = document.querySelector(".js-search-bar").value;
+    window.location.href = `orders.html?search=${search}`;
+  });
+
+  document
+    .querySelector(".js-search-bar")
+    .addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        const searchTerm = document.querySelector(".js-search-bar").value;
+        window.location.href = `orders.html?search=${searchTerm}`;
+      }
+    });
 }
 
 loadPage();
