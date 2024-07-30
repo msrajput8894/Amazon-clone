@@ -20,7 +20,9 @@ select {
   cursor: pointer;
 }
 
-input, select, button {
+input,
+select,
+button {
   font-family: Roboto, Arial;
 }
 
@@ -42,6 +44,14 @@ input, select, button {
   background: rgb(255, 216, 20);
   border-color: rgb(252, 210, 0);
   box-shadow: none;
+}
+
+/* if no products found with search keyword this class will be used */
+
+.no-products-message {
+  font-size: 16px;
+  margin-top: 15px;
+  margin-left: 10px;
 }
 
 .button-secondary {
