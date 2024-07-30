@@ -72,6 +72,22 @@ async function loadPage() {
   `;
 
   document.querySelector(".js-order-tracking").innerHTML = trackingHTML;
+
+  // Add event listener for the search button
+  document.querySelector(".js-search-button").addEventListener("click", () => {
+    const search = document.querySelector(".js-search-bar").value;
+    window.location.href = `index.html?search=${search}`;
+  });
+
+  // Extra feature: searching by pressing "Enter" on the keyboard.
+  document
+    .querySelector(".js-search-bar")
+    .addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        const searchTerm = document.querySelector(".js-search-bar").value;
+        window.location.href = `index.html?search=${searchTerm}`;
+      }
+    });
 }
 
 loadPage();

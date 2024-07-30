@@ -114,7 +114,7 @@ async function loadPage() {
       const productId = button.dataset.productId;
       buyAgain(productId);
 
-      // (Optional) display a message that the product was added,
+      // display a message that the product was added,
       // then change it back after a second.
       button.innerHTML = "Added";
       setTimeout(() => {
