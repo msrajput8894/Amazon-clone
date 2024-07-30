@@ -2,6 +2,7 @@ import { renderAmazonHeader } from "../scripts/utils/amazonHeader.js";
 
 export let cart;
 
+//load the data from local storage
 loadFromStorage();
 
 export function loadFromStorage() {
@@ -23,6 +24,7 @@ export function loadFromStorage() {
   }
 }
 
+//save the data to local storage
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
@@ -56,6 +58,8 @@ export function addToCart(productId) {
   displayMessage(productId);
 }
 
+
+// to buy product again from orders page
 export function buyAgain(productId) {
   let matchingItem;
   cart.forEach((cartItem) => {
@@ -99,6 +103,9 @@ function displayMessage(productId) {
   addedMessageTimeouts[productId] = timeoutId;
 }
 
+
+
+// removes the product from cart
 export function removeFromCart(productId) {
   const newCart = [];
 
@@ -113,6 +120,8 @@ export function removeFromCart(productId) {
   saveToStorage();
 }
 
+
+//calculate the cart quantity
 export function calculateCartQuantity() {
   let cartQuantity = 0;
   cart.forEach((cartItem) => {
@@ -122,6 +131,8 @@ export function calculateCartQuantity() {
   return cartQuantity;
 }
 
+
+// updates the cart quantity
 export function updateQuantity(productId, newQuantity) {
   let matchingItem;
 
@@ -136,6 +147,8 @@ export function updateQuantity(productId, newQuantity) {
   saveToStorage();
 }
 
+
+//updates dilivery options
 export function updateDeliveryOption(productId, deliveryOptionId) {
   let matchingItem;
   cart.forEach((cartItem) => {
@@ -149,6 +162,8 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
   saveToStorage();
 }
 
+
+//loads cart from backend using XMLHttpRequest
 export function loadCart(fun) {
   const xhr = new XMLHttpRequest();
 
@@ -161,6 +176,8 @@ export function loadCart(fun) {
   xhr.send();
 }
 
+
+// loads cart from backend using fetch request
 export async function loadCartFetch() {
   const response = await fetch("https://supersimplebackend.dev/cart");
   const text = await response.text();
@@ -168,6 +185,8 @@ export async function loadCartFetch() {
   return text;
 }
 
+
+//reset the cart to empty.
 export function resetCart() {
   cart = [];
   saveToStorage();
