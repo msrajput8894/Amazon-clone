@@ -4,6 +4,8 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
 import { addOrder } from "../../data/orders.js";
 
+
+//renders the payment summary on checkout page
 export function renderPaymentSummary() {
   let productPriceCents = 0;
   let shippingPriceCents = 0;
@@ -73,9 +75,10 @@ export function renderPaymentSummary() {
 
   document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
 
-  if (cart.length === 0) {
-  }
+  
 
+
+  //event listener for Place order button
   document
     .querySelector(".js-place-order")
     .addEventListener("click", async () => {
@@ -107,6 +110,8 @@ export function renderPaymentSummary() {
     });
 }
 
+
+// updates the place order button based on the cart quantity
 export function updatePlaceOrderButton() {
   const placeOrderButton = document.querySelector(".js-place-order");
   if (cart.length === 0) {

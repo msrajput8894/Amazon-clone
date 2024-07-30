@@ -3,11 +3,10 @@ import {
   renderPaymentSummary,
   updatePlaceOrderButton,
 } from "./checkout/paymentSummary.js";
-import { loadProducts, loadProductsFetch } from "../data/products.js";
-import { loadCart, cart, calculateCartQuantity } from "../data/cart.js";
+import { loadProductsFetch } from "../data/products.js";
+import { loadCart,calculateCartQuantity } from "../data/cart.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
-//import "../data/cart-class.js";
-//import "../data/backend-practice.js";
+
 
 renderCheckoutHeader();
 
@@ -41,45 +40,4 @@ export function updateCartQuantity() {
   ).innerHTML = `${cartQuantity} items`;
 }
 
-/*
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
-    });
-  }),
-]).then(() => {
-  renderOrderSummary();
-  renderPaymentSummary();
-});
-*/
-/*
-new Promise((resolve) => {
-  loadProducts(() => {
-    resolve();
-  });
-})
-  .then(() => {
-    return new Promise((resolve) => {
-      loadCart(() => {
-        resolve();
-      });
-    });
-  })
-  .then(() => {
-    renderOrderSummary();
-    renderPaymentSummary();
-  });
 
-  */
-
-/*
-loadProducts(() => {
-  loadCart(() => {
-    renderOrderSummary();
-    renderPaymentSummary();
-  });
-});
-
-*/
