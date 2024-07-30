@@ -126,11 +126,16 @@ async function loadPage() {
     });
   });
 
+
+
+  //Event listener for search button
   document.querySelector(".js-search-button").addEventListener("click", () => {
     const search = document.querySelector(".js-search-bar").value;
     window.location.href = `orders.html?search=${search}`;
   });
 
+
+  // Keyboar support to search bar
   document
     .querySelector(".js-search-bar")
     .addEventListener("keydown", (event) => {
@@ -141,4 +146,7 @@ async function loadPage() {
     });
 }
 
+
+
+//calling load page function
 loadPage();

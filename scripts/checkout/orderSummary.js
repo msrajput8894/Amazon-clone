@@ -1,11 +1,10 @@
 import {
   cart,
-  loadCart,
   removeFromCart,
   updateDeliveryOption,
   updateQuantity,
 } from "../../data/cart.js";
-import { products, getProduct } from "../../data/products.js";
+import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import {
@@ -16,7 +15,6 @@ import {
   renderPaymentSummary,
   updatePlaceOrderButton,
 } from "./paymentSummary.js";
-import { updateCartQuantity } from "../checkout.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 export function renderOrderSummary() {
@@ -152,7 +150,6 @@ export function renderOrderSummary() {
       );
 
       container.classList.add("is-editing-quantity");
-      updateCartQuantity();
       renderCheckoutHeader();
       updatePlaceOrderButton();
       renderPaymentSummary();
@@ -178,6 +175,8 @@ export function renderOrderSummary() {
     const updateQuantityHandler = () => {
       const newQuantity = quantityInput.value ? Number(quantityInput.value) : 1;
 
+
+      //this if condition checks input validation for update link
       if (isNaN(newQuantity) || newQuantity < 0 || newQuantity > 1000) {
         errorMessage.textContent = "Quantity must be between 0 and 1000.";
         quantityInput.style.borderColor = "red";
@@ -199,6 +198,8 @@ export function renderOrderSummary() {
       }
     };
 
+
+    // provides keyboard support to update link
     link.addEventListener("click", updateQuantityHandler);
 
     quantityInput.addEventListener("keypress", (event) => {
@@ -207,6 +208,7 @@ export function renderOrderSummary() {
       }
     });
   });
+
 
   // to delete items from cart
   document.querySelectorAll(".js-delete-link").forEach((link) => {
@@ -220,6 +222,7 @@ export function renderOrderSummary() {
       updatePlaceOrderButton();
     });
   });
+
 
   //to update delivery option
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
