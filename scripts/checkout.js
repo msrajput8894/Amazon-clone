@@ -7,7 +7,7 @@ import { loadProductsFetch } from "../data/products.js";
 import { loadCart,calculateCartQuantity } from "../data/cart.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 
-
+// renders checkout header using MVC.
 renderCheckoutHeader();
 
 async function loadPage() {
@@ -24,7 +24,7 @@ async function loadPage() {
     console.log("Unexpected Error. Please try again later.");
   }
 
-  updateCartQuantity();
+ 
   renderOrderSummary();
   renderPaymentSummary();
   updatePlaceOrderButton();
@@ -32,12 +32,6 @@ async function loadPage() {
 
 loadPage();
 
-export function updateCartQuantity() {
-  const cartQuantity = calculateCartQuantity();
 
-  document.querySelector(
-    ".js-cart-item-quantity"
-  ).innerHTML = `${cartQuantity} items`;
-}
 
 

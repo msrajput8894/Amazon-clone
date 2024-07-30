@@ -1,5 +1,7 @@
 import { cart } from "../../data/cart.js";
 
+
+// renders the amazon header in home,orders, and tracking page.
 export function renderAmazonHeader() {
   let cartQuantity = 0;
 
