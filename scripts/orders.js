@@ -71,6 +71,15 @@ async function loadPage() {
     order.products.forEach((productDetails) => {
       const product = getProduct(productDetails.productId);
 
+      // to update delivery message
+      const deliveryTime = dayjs(productDetails.estimatedDeliveryTime);
+      const today = dayjs();
+
+      //if deliveryTime passed current time display Delivered or else display Arriving
+      const deliveryMessage =today.isAfter(deliveryTime)?`Delivered on`: `Arriving on`;
+     
+  
+
       productsListHTML += `
         <div class="product-image-container">
           <img src="${product.image}">
@@ -80,7 +89,7 @@ async function loadPage() {
             ${product.name}
           </div>
           <div class="product-delivery-date">
-            Arriving on: ${dayjs(productDetails.estimatedDeliveryTime).format(
+            ${deliveryMessage}: ${dayjs(productDetails.estimatedDeliveryTime).format(
               "MMMM D"
             )}
           </div>
