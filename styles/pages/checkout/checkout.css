@@ -1,4 +1,4 @@
-/* Ensure the main container adapts correctly */
+/* Main container */
 .main {
   max-width: 1100px;
   padding-left: 30px;
@@ -9,13 +9,12 @@
   margin-right: auto;
 }
 
-/* Ensure the grid layout adapts correctly */
+/* Checkout grid layout */
 .checkout-grid {
   display: grid;
   grid-template-columns: 1fr 350px;
   column-gap: 12px;
   align-items: start;
-  overflow-x: auto; /* Add this line to prevent overflow */
 }
 
 /* Adjust grid layout for smaller screens */
@@ -39,7 +38,7 @@
   }
   
   .payment-summary-row {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Adjusted for mobile view */
     font-size: 12px;
   }
   
@@ -48,20 +47,12 @@
   }
 }
 
-/* Ensure payment summary is styled correctly */
+/* Payment summary styles */
 .payment-summary {
   border: 1px solid rgb(222, 222, 222);
   border-radius: 4px;
   padding: 18px;
   padding-bottom: 5px;
-}
-
-/* Ensure items in the cart are styled correctly */
-.cart-item-container {
-  border: 1px solid rgb(222, 222, 222);
-  border-radius: 4px;
-  padding: 18px;
-  margin-bottom: 12px;
 }
 
 .payment-summary-title {
@@ -72,13 +63,14 @@
 
 .payment-summary-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 2fr 1fr; /* Adjusted to reduce whitespace */
   font-size: 15px;
   margin-bottom: 9px;
 }
 
 .payment-summary-money {
   text-align: right;
+  white-space: nowrap; /* Prevent line breaks */
 }
 
 .subtotal-row .payment-summary-money {
@@ -97,6 +89,7 @@
   padding-top: 18px;
 }
 
+/* Place order button styles */
 .place-order-button {
   width: 100%;
   padding-top: 12px;
@@ -114,7 +107,7 @@
   box-shadow: none;
 }
 
-/* Ensure quantity input fields are hidden unless editing */
+/* Quantity input styles */
 .quantity-input {
   width: 30px;
   display: none;
