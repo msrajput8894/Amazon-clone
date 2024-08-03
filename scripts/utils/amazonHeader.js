@@ -1,7 +1,6 @@
+
 import { cart } from "../../data/cart.js";
 
-
-// renders the amazon header in home,orders, and tracking page.
 export function renderAmazonHeader() {
   let cartQuantity = 0;
 
@@ -44,7 +43,28 @@ export function renderAmazonHeader() {
           <div class="cart-text">Cart</div>
         </a>
       </div>
+
+      <div class="hamburger-menu js-hamburger-menu">
+        <img src="images/icons/hamburger-menu.png" alt="Menu" />
+      </div>
+
+      <div class="amazon-mobile-menu js-amazon-mobile-menu">
+        <a class="orders-link header-link" href="orders.html">
+          <span class="returns-text">Returns</span>
+          <span class="orders-text">& Orders</span>
+        </a>
+        <a class="cart-link header-link" href="checkout.html">
+          <img class="cart-icon" src="images/icons/cart-icon.png" />
+          <div class="cart-quantity js-cart-quantity">${cartQuantity}</div>
+          <div class="cart-text">Cart</div>
+        </a>
+      </div>
   `;
 
   document.querySelector(".js-amazon-header").innerHTML = amazonHeaderHTML;
+
+  // Add event listener for the hamburger menu
+  document.querySelector('.js-hamburger-menu').addEventListener('click', () => {
+    document.querySelector('.js-amazon-mobile-menu').classList.toggle('active');
+  });
 }
