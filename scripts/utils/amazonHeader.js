@@ -1,5 +1,6 @@
-
 import { cart } from "../../data/cart.js";
+
+let hideTimeout;
 
 export function renderAmazonHeader() {
   let cartQuantity = 0;
@@ -63,8 +64,26 @@ export function renderAmazonHeader() {
 
   document.querySelector(".js-amazon-header").innerHTML = amazonHeaderHTML;
 
+  
+
   // Add event listener for the hamburger menu
   document.querySelector('.js-hamburger-menu').addEventListener('click', () => {
-    document.querySelector('.js-amazon-mobile-menu').classList.toggle('active');
+    const mobileMenu = document.querySelector('.js-amazon-mobile-menu');
+    if (mobileMenu.classList.contains('active')) {
+      clearTimeout(hideTimeout);
+      mobileMenu.classList.remove('active');
+      
+      hideTimeout = setTimeout(() => {
+        if (!mobileMenu.classList.contains('active')) {
+          mobileMenu.style.display = 'none';
+        }
+      }, 300); // equals transition duration
+    } else {
+      clearTimeout(hideTimeout);
+      mobileMenu.style.display = 'flex';
+      setTimeout(() => {
+        mobileMenu.classList.add('active');
+      }, 10); // Short delay to ensure display is set before adding the class
+    }
   });
 }
