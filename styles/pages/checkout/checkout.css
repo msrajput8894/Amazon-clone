@@ -78,7 +78,14 @@
     grid-row: 1;
     margin-bottom: 12px;
   }
-  
+  .payment-summary-row{
+    grid-template-columns: 200px 1fr;
+    font-size: 12px;
+  }
+
+  .payment-summary-money {
+    text-align: left;
+}
 }
 
 .delivery-date {
@@ -266,3 +273,4 @@
     text-align: left;
 }
 }
+
