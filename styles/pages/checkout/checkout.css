@@ -14,6 +14,10 @@
   margin-right: auto;
 }
 
+.payment-summary-details{
+  display: inline-block;
+}
+
 .page-title {
   font-weight: 700;
   font-size: 22px;
