@@ -34,7 +34,7 @@
 
 @media (max-width: 1000px) {
   .main {
-    max-width: 500px;
+    max-width: 800px;
   }
 
   .checkout-grid {
@@ -73,6 +73,10 @@
       the HTML. grid-row overrides this default ordering). */
     grid-row: 1;
     margin-bottom: 12px;
+  }
+  .payment-summary-row{
+    grid-template-columns: 2fr 1fr;
+    font-size: 12px;
   }
 }
 
