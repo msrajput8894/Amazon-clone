@@ -39,7 +39,7 @@
   
   .payment-summary-row {
     grid-template-columns: 1fr 1fr; /* Adjusted for mobile view */
-    font-size: 12px;
+    font-size: 15px;
   }
   
   .delivery-options {
@@ -63,7 +63,7 @@
 
 .payment-summary-row {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Adjusted to reduce whitespace */
+  grid-template-columns: 2fr 1fr; 
   font-size: 15px;
   margin-bottom: 9px;
 }
@@ -188,6 +188,8 @@
   margin-left: 3px;
 }
 
+
+/* delivery options styles */
 .delivery-options-title {
   font-weight: 700;
   margin-bottom: 10px;
