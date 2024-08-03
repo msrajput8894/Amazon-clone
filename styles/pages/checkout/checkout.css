@@ -38,7 +38,7 @@
 
 @media (max-width: 1000px) {
   .main {
-    max-width: 800px;
+    max-width: 500px;
   }
 
   .checkout-grid {
@@ -262,3 +262,15 @@
 .is-editing-quantity .update-quantity-link {
   display: none;
 }
+
+@media(max-width: 1000px){
+  .payment-summary-row{
+    grid-template-columns: 250px 1fr;
+    font-size: 12px;
+  }
+
+  .payment-summary-money {
+    text-align: left;
+}
+}
+
