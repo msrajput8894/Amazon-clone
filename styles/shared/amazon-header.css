@@ -161,7 +161,7 @@
 
 /* Mobile dropdown menu */
 .amazon-mobile-menu {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -169,14 +169,12 @@
   position: absolute;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   top: 60px;
   left: 0;
   right: 0;
   width: 100%;
   z-index: 1000;
-  margin: 0;
-  padding: 0;
   visibility: hidden;
   overflow: hidden;
 }
@@ -185,7 +183,9 @@
   max-height: 300px;
   opacity: 1;
   visibility: visible;
+  display: flex;
 }
+
 
 .amazon-mobile-menu .header-link {
   padding: 15px;
