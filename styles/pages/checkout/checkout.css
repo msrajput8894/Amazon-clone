@@ -12,7 +12,6 @@
      without needing a container. */
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
 }
 
 .page-title {
@@ -35,9 +34,7 @@
 
 @media (max-width: 1000px) {
   .main {
-    max-width: 800px;
-    margin-left: 10px;
-    margin-right: 10px;
+    max-width: 500px;
   }
 
   .checkout-grid {
@@ -66,7 +63,6 @@
 
 .payment-summary {
   padding-bottom: 5px;
-  overflow: hidden;
 }
 
 @media (max-width: 1000px) {
