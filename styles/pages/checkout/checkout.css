@@ -17,6 +17,17 @@
   align-items: start;
 }
 
+.cart-item-container,
+.payment-summary {
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 4px;
+  padding: 18px;
+}
+
+.cart-item-container {
+  margin-bottom: 12px;
+}
+
 /* Adjust grid layout for smaller screens */
 @media (max-width: 1000px) {
   .main {
